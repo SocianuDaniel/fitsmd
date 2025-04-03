@@ -73,6 +73,7 @@ WSGI_APPLICATION = 'fitsmd.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/rgit push origin main
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
