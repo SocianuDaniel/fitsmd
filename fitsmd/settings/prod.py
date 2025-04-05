@@ -11,3 +11,4 @@ DATABASES = {
 }
 DEBUG=False
 STATIC_ROOT = env('STATIC_ROOT')
+ALLOWED_HOSTS = ['15.160.161.74','smdonline.net','www.smdonline.net']

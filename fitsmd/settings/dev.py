@@ -13,3 +13,4 @@ DATABASES = {
 }
 STATIC_ROOT = env('STATIC_ROOT')
 
+ALLOWED_HOSTS = ['*']
