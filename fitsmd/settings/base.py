@@ -27,7 +27,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("SECRET_KEY",default="unsafe-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -78,16 +77,6 @@ WSGI_APPLICATION = 'fitsmd.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/rgit push origin main
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-        'USER': env("DB_USER"),
-        'PASSWORD': env("DB_PASS"),
-        'HOST': env("DB_HOST"),
-        'PORT': env("DB_PORT"),
-    }
-}
 
 
 # Password validation
@@ -125,7 +114,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = env('STATIC_ROOT')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
