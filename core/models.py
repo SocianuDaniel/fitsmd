@@ -1,8 +1,10 @@
 from django.contrib.auth.models import (
     AbstractBaseUser,
     BaseUserManager,
-    PermissionsMixin
+    PermissionsMixin,
+    
 )
+from django.contrib.auth import get_user_model
 from django.db import models
 
 
@@ -37,3 +39,31 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
     USERNAME_FIELD = 'email'
+
+class Owner(models.Model):
+    """Create a owner model"""
+    user = models.ForeignKey(
+        get_user_model(),
+        related_name='owner',
+        on_delete=models.CASCADE
+        )
+    
+    def __str__(self):
+        return self.user.email
+
+
+class OwnerProfile(models.Model):
+    """Create a Profile Model for the owner """
+    owner = models.OneToOneField(Owner, related_name='owner_profile', on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, blank=True)
+    location = models.CharField(max_length=200, blank=True, null=True, default="Earth")
+    short_intro = models.CharField(max_length=200, blank=True, null=True, default="This is a default intro. User has not added a intro.")
+    bio = models.TextField(blank=True, null=True)
+    profile_image = models.ImageField(
+        null=True, blank=True, upload_to='profiles/', default="profiles/user-default.png")
+    social_github = models.CharField(max_length=200, blank=True, null=True)
+    social_twitter = models.CharField(max_length=200, blank=True, null=True)
+    social_linkedin = models.CharField(max_length=200, blank=True, null=True)
+    social_youtube = models.CharField(max_length=200, blank=True, null=True)
+    social_website = models.CharField(max_length=200, blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
