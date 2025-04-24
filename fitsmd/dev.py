@@ -11,6 +11,5 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-STATIC_ROOT = env('STATIC_ROOT')
-
+STATIC_ROOT = os.path.join(BASE_DIR, env('STATIC_ROOT'))
 ALLOWED_HOSTS = ['*']
