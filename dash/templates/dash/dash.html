@@ -1,0 +1,9 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block title %}fitsmd{% endblock title %}
+
+{% block content %}
+    <img src="{% static owner.owner_profile.get_image_url %} " width="300px;">
+
+
+{% endblock content %}

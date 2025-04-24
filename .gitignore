@@ -1,5 +1,5 @@
 
-fitsmd/.env
+fitsmd/settings/.env
 .env
 ### OSX ###
 DS_Store

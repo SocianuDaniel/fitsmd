@@ -1,9 +1,14 @@
 from django.shortcuts import render
+
+import core.models
 from core import forms
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import get_user_model
 from core import models
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
+
 
 def owner_register(request):
     """Function to register a new owner"""
@@ -14,11 +19,12 @@ def owner_register(request):
             password1 = form.cleaned_data['password1']
             
             user = get_user_model().objects.create_user(
-                email=email, password=password1
+                email=email, password=password1, level=1
                 )
             if user:
                 owner = models.Owner()
                 owner.user = user
+
                 owner.save()
                 return redirect('owner:registration-complete')
 
@@ -29,3 +35,6 @@ def owner_register(request):
 
 
     return render(request,'owner/register.html')
+
+
+

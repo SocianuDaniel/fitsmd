@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import environ
-
+from django.urls import reverse_lazy
 env = environ.Env()
 # reading .env file
 environ.Env.read_env()
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'core.apps.CoreConfig',
     'owner.apps.OwnerConfig',
+    'dash.apps.DashConfig',
 ]
 
 MIDDLEWARE = [
@@ -121,7 +122,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/../static/images')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -129,3 +130,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/../static/images')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'core.User'
+LOGIN_URL = reverse_lazy('dash:user-login')
+LOGIN_REDIRECT_URL = reverse_lazy('dash:dashboard')
