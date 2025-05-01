@@ -1,0 +1,7 @@
+Django
+pillow
+boto3
+django-storages
+gunicorn
+environs
+django-recaptcha

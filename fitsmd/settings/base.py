@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'owner.apps.OwnerConfig',
     'dash.apps.DashConfig',
     'storages',
+    'django_recaptcha',
 ]
 
 MIDDLEWARE = [
@@ -143,55 +144,13 @@ LOGIN_REDIRECT_URL = reverse_lazy('dash:dashboard')
 
 
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static'),
-# ]
-#
-# AWS_S3_ACCESS_KEY_ID = env("AWS_S3_ACCESS_KEY_ID")
-# AWS_S3_SECRET_ACCESS_KEY = env("AWS_S3_SECRET_ACCESS_KEY")
-# AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
-# AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-#
-# AWS_S3_OBJECT_PARAMETERS = {
-#     'CacheControl': 'max-age=86400',
-# }
-#
-# AWS_LOCATION = 'static'
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-#
-# DEFAULT_FILE_STORAGE = 'fitsmd.settings.storage_backends.MediaStorage'  # <-- here is where we reference it
 
 
-
-STORAGES = {
-    "default": {
-        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
-        "OPTIONS": {
-            "access_key": env("AWS_S3_ACCESS_KEY_ID"),
-            "secret_key": env("AWS_S3_SECRET_ACCESS_KEY"),
-            "bucket_name": env('AWS_STORAGE_BUCKET_NAME'),
-            "region_name": "eu-south-1", # you can set your region of the bucket
-            "object_parameters": {
-                "CacheControl": "max-age=86400",
-            },
-            "custom_domain": f"{os.environ.get('AWS_STORAGE_BUCKET_NAME')}.s3.eu-south-1.amazonaws.com", #the url must be configured according to the region
-            # "default_acl": "public-read",
-            "file_overwrite": False,
-            "location": "media",  # stores files under 'media/' directory
-        },
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
-
-# Static Files Configuration
-STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-# Media Files Configuration
-MEDIA_URL = f"https://{os.environ.get('AWS_STORAGE_BUCKET_NAME')}.s3.eu-south-1.amazonaws.com/media/"
-print(MEDIA_URL)
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE_KEY')
+RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC_KEY')
